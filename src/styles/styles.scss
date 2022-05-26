@@ -1,0 +1,16 @@
+@import 'colours.scss';
+@import 'navbar.scss';
+@import 'products.scss';
+@import 'product_details.scss';
+@import 'fonts';
+
+body {
+  margin: 24px 56px;
+  color: $graphite;
+  font-family: Poppins;
+}
+
+a {
+  color: $graphite;
+  text-decoration: none;
+}

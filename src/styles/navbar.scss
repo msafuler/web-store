@@ -1,0 +1,86 @@
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 24px 0 24px;
+}
+
+.navbar-categories {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+}
+
+.selected-category {
+  border-bottom: 3px solid $light-green;
+  padding-bottom: 8px;
+  color: $light-green;
+}
+
+.right-side-icons {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  font-size: 16pt;
+  gap: 16px;
+}
+
+.bag-container {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+#green-bag {
+  width: 24px;
+  height: 24px;
+}
+
+#trolley {
+  width: 24px;
+  height: 24px;
+}
+
+.currencies {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 1px 16px 1px $light-grey;
+  position: absolute;
+  margin-top: 32px;
+}
+
+.pick-currency {
+  padding: 8px 16px;
+}
+
+ .pick-currency:hover {
+  background-color: $bright-grey;
+ }
+
+#currency-icon {
+  font-size: 16px;
+  font-weight: bolder;
+}
+
+.arrow {
+  border: solid $graphite;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-left: 4px;
+  transition: all 0.4s ease-in-out;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.up {
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+}
+
+.hidden {
+ display: none;
+}
