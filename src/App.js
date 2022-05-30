@@ -4,7 +4,7 @@ import { Query } from '@apollo/client/react/components';
 import { Switch, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import ProductList from './components/ProductList';
-import TrolleyList from './components/TrolleyList';
+import Checkout from './components/Checkout';
 import ProductDetails from './components/ProductDetails';
 import './App.css';
 
@@ -27,6 +27,7 @@ const getAll = gql`
         amount
       }
       gallery
+      description
       inStock
       category
       attributes {
@@ -70,10 +71,15 @@ class App extends React.Component {
   }
 
   addToTrolley(product) {
+
+    //this.state.trolley[product.id].filter((item) => item.attributes product.attributes)
+
+
+
     if (!(product.id in this.state.trolley)) {
-      this.setState({ trolley: {...this.state.trolley, [product.id]: [product, 1]} })
+      this.setState({ trolley: {...this.state.trolley, [product.id]: {product: product, quantity: 1}} })
     } else {
-      this.setState({ trolley: {...this.state.trolley, [product.id]: [product, this.state.trolley[product.id][1] + 1]}})
+      this.setState({ trolley: { ...this.state.trolley, [product.id]: [{ product: product, quantity: this.state.trolley[product.id].quantity + 1}]}})
     }
   }
 
@@ -87,7 +93,6 @@ class App extends React.Component {
         {({ loading, error, data }) => {
           if (loading) return <p>Loading…</p>;
           if (error) return <p>Error :(</p>;
-          console.log(data)
         return (
           <div>
             <Navbar
@@ -117,9 +122,13 @@ class App extends React.Component {
                   addToTrolley={this.addToTrolley}
                 />
               </Route>
-             {/* <Route path="/checkout">
-                <TrolleyList />
-              </Route> */}
+             <Route path="/checkout">
+                <Checkout
+                  products={this.productData(data)}
+                  currencies={data.currencies}
+                  currency={this.state.currency}
+                />
+              </Route>
             </Switch>
           </div>)
         }}

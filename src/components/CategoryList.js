@@ -1,5 +1,6 @@
 import React from 'react';
 import { gql } from '@apollo/client';
+import { Link } from "react-router-dom";
 import { Query } from '@apollo/client/react/components';
 
 const getCategories = gql`
@@ -24,7 +25,7 @@ export default class CategoryList extends React.Component {
                 onClick={() => this.props.changeCategory(category)}
                 className={category.name === this.props.category.name ? 'selected-category' : ''}
               >
-                {category.name.toUpperCase()}
+                <Link to="/products/">{category.name.toUpperCase()}</Link>
               </span>
             ))}
           </div>)
