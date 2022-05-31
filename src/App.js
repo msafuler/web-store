@@ -55,11 +55,13 @@ class App extends React.Component {
       category: {
         name: 'all'
       },
-      trolley: {}
+      trolley: {},
     };
 
     this.changeCurrency = this.changeCurrency.bind(this);
     this.changeCategory = this.changeCategory.bind(this);
+    this.addToTrolley = this.addToTrolley.bind(this);
+    this.removeFromTrolley = this.removeFromTrolley.bind(this);
   }
 
   changeCurrency(newCurrency) {
@@ -70,16 +72,36 @@ class App extends React.Component {
     this.setState({ category: newCategory });
   }
 
-  addToTrolley(product) {
-
-    //this.state.trolley[product.id].filter((item) => item.attributes product.attributes)
-
-
-
+  addToTrolley(product, attributes) {
     if (!(product.id in this.state.trolley)) {
-      this.setState({ trolley: {...this.state.trolley, [product.id]: {product: product, quantity: 1}} })
+      this.setState({ trolley: {...this.state.trolley, [product.id]: [{product: product, quantity: 1, attributes: attributes}]} })
     } else {
-      this.setState({ trolley: { ...this.state.trolley, [product.id]: [{ product: product, quantity: this.state.trolley[product.id].quantity + 1}]}})
+
+      const commonProducts = this.state.trolley[product.id].filter(p => {
+        return p.attributes.join("") === attributes.join("")
+      })
+      if (commonProducts.length) {
+        const newProducts = [...this.state.trolley[product.id]]
+        const commonIndex = newProducts.indexOf(commonProducts[0])
+        newProducts[commonIndex].quantity++
+        this.setState({ trolley: { ...this.state.trolley, [product.id]: newProducts }})
+      } else {
+        const newProducts = [...this.state.trolley[product.id], { product: product, quantity: 1, attributes: attributes }]
+        this.setState({ trolley: { ...this.state.trolley, [product.id]: newProducts }})
+      }
+    }
+  }
+
+  removeFromTrolley(product, attributes) {
+    const commonProducts = this.state.trolley[product.id].filter(p => p.attributes.join("") === attributes.join(""))
+    if (commonProducts.length) {
+      const newProducts = [...this.state.trolley[product.id]]
+      const commonIndex = newProducts.indexOf(commonProducts[0])
+      newProducts[commonIndex].quantity--
+      if (newProducts[commonIndex].quantity === 0) {
+        newProducts.splice(commonIndex, 1)
+      }
+      this.setState({ trolley: { ...this.state.trolley, [product.id]: newProducts } })
     }
   }
 
@@ -127,6 +149,9 @@ class App extends React.Component {
                   products={this.productData(data)}
                   currencies={data.currencies}
                   currency={this.state.currency}
+                  addToTrolley={this.addToTrolley}
+                  removeFromTrolley={this.removeFromTrolley}
+                  trolley={this.state.trolley}
                 />
               </Route>
             </Switch>

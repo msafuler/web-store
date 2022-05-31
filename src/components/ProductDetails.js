@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
-import AttributeDetails from './AttributeDetails'
+import AttributeDetails from './AttributeDetails';
+import { findPrice } from '../utilities/utility';
 
 class ProductDetails extends React.Component {
   constructor(props) {
@@ -11,12 +12,20 @@ class ProductDetails extends React.Component {
 
     this.state = {
       picture: thisProduct.gallery[0],
-      cart: {}
+      cart: {},
+      selectedAttributes: thisProduct.attributes.map(attribute => attribute.items[0].value)
     }
+    this.changeSelectedAttributeItem = this.changeSelectedAttributeItem.bind(this)
   }
 
   changePicture(nextPicture) {
     this.setState({ picture: nextPicture })
+  }
+
+  changeSelectedAttributeItem(item, selectedAttributeIndex) {
+    const newSelectedAttributes = [...this.state.selectedAttributes];
+    newSelectedAttributes[selectedAttributeIndex] = item;
+    this.setState({ selectedAttributes: newSelectedAttributes })
   }
 
   render() {
@@ -27,7 +36,8 @@ class ProductDetails extends React.Component {
     if (!thisProduct) {
       return <h1 className="product-error">Product not found</h1>
     } else {
-      const price = thisProduct.prices.filter(price => price.currency.label === this.props.currency.label)[0]
+      const price = findPrice(thisProduct.prices, this.props.currency)
+
       return (
         <div className="product-details-container">
           <div className="small-pic-container">
@@ -46,18 +56,25 @@ class ProductDetails extends React.Component {
             <h2 className="product-detail-name">
               {thisProduct.name}
             </h2>
-            {thisProduct.attributes.map((attribute) =>
+            {thisProduct.attributes.map((attribute, attributeIndex) =>
               {
                 return (
-                  <AttributeDetails attribute={attribute} key={attribute.name}/>
+                  <AttributeDetails
+                    attribute={attribute}
+                    key={attribute.name}
+                    attributeIndex={attributeIndex}
+                    selectedAttributeItem={this.state.selectedAttributes[attributeIndex]}
+                    changeSelectedAttributeItem={this.changeSelectedAttributeItem}
+                  />
                 )
               }
             )}
             <span className="product-attribute">PRICE:</span>
             <span className="product-attribute-price">{this.props.currency.symbol} {price.amount}</span>
             <button
-              className="add-to-cart-btn"
-              onClick={() => this.props.addToTrolley()}
+              className={`add-to-cart-btn ${this.props.addToTrolley ? 'btn-clicked' : ''}`}
+              disabled={!thisProduct.inStock}
+              onClick={() => this.props.addToTrolley(thisProduct, this.state.selectedAttributes) }
             >
               ADD TO CART
             </button>

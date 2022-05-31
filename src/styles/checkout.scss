@@ -1,0 +1,125 @@
+.order-btn {
+  background-color: $light-green;
+  border: 1px solid $light-green;
+  font-weight: bolder;
+  color: white;
+  padding: 12px 48px 12px 48px;
+  margin-top: 32px;
+  width: 80%;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.cart-container {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-product-container {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: auto 5vw 20vw;
+  gap: 8px;
+  justify-content: stretch;
+}
+
+.checkout-picture-container {
+  display: flex;
+  justify-self: end;
+}
+
+.checkout-pic {
+  height: auto;
+  width: 100%;
+  align-items: center;
+  object-fit: scale-down;
+  max-height: 300px;
+}
+
+.checkout-buttons-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  justify-self: end;
+}
+
+.line-break {
+  border-top: 1px solid $bright-grey;
+  width: 100%;
+  margin: 24px 0 24px 0;
+}
+
+.checkout-product {
+  .product-color-button:hover {
+    border: none;
+    margin: 0;
+    pointer-events: none;
+  }
+  h3 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+  .product-attribute-button:hover {
+    background-color: white;
+    color: $graphite;
+    font-weight: normal;
+    pointer-events: none;
+  }
+  .selected.product-attribute-button:hover {
+    background-color: $graphite;
+    color: white;
+    font-weight: bolder;
+  }
+  .selected.product-color-button {
+    border: 1px solid $light-green;
+    margin: -2px;
+  }
+}
+
+.cart-div {
+  margin-bottom: 56px;
+}
+
+@media only screen and (max-width: 1400px) {
+  .checkout-product-container {
+    grid-template-columns: auto 5vw 24vw;
+  }
+}
+
+@media only screen and (max-width: 1180px) {
+  .checkout-product-container {
+    grid-template-columns: auto 5vw 26vw;
+  }
+}
+
+@media only screen and (max-width: 1090px) {
+  .checkout-product-container {
+    grid-template-columns: auto 5vw 30vw;
+  }
+}
+
+@media only screen and (max-width: 940px) {
+  .checkout-product-container {
+    grid-template-columns: auto 5vw 34vw;
+  }
+}
+
+@media only screen and (max-width: 830px) {
+  .checkout-product-container {
+    grid-template-columns: auto 5vw 38vw;
+  }
+}
+
+@media only screen and (max-width: 740px) {
+  .checkout-product-container {
+    grid-template-columns: auto 5vw 44vw;
+  }
+}
+
+@media only screen and (max-width: 715px) {
+  .checkout-product-container {
+    grid-template-columns: 49vw auto 30vw;
+
+  }
+}

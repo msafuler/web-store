@@ -93,10 +93,31 @@
   margin-top: 32px;
   width: 80%;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .product-description {
   font-size: 12px;
   margin-top: 32px;
   width: 80%;
+}
+
+.selected.product-color-button {
+  border: 1px solid $light-green;
+  margin: -2px;
+}
+
+.selected.product-attribute-button {
+  background-color: $graphite;
+  color: white;
+  font-weight: bolder;
+}
+
+.btn-clicked:active {
+  background-color: $middle-green;
+}
+
+.add-to-cart-btn:disabled {
+  background-color: $grey-green;
+  border: none;
 }
