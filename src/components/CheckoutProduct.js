@@ -3,6 +3,21 @@ import AttributeDetails from './AttributeDetails';
 import { findPrice } from '../utilities/utility';
 
 export default class CheckoutProduct extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      pictureIndex: 0
+    }
+  }
+
+  nextPicture() {
+    this.setState({ pictureIndex: this.state.pictureIndex + 1 })
+  }
+
+  previousPicture() {
+    this.setState({ pictureIndex: this.state.pictureIndex - 1 })
+  }
 
   render() {
     const price = findPrice(this.props.cartItem.product.prices, this.props.currency)
@@ -39,10 +54,28 @@ export default class CheckoutProduct extends React.Component {
             <button onClick={() => this.props.removeFromTrolley(this.props.cartItem.product, this.props.cartItem.attributes)}>-</button>
         </div>
         <div className="checkout-picture-container">
-          <img src={this.props.cartItem.product.gallery[0]} alt="checkout-pic" className="checkout-pic" />
+          <img src={this.props.cartItem.product.gallery[this.state.pictureIndex]} alt="checkout-pic" className="checkout-pic" />
+          {this.props.displayButtons &&
+            <>
+              {this.state.pictureIndex > 0 &&
+                <button
+                  onClick={() => this.previousPicture()}
+                >
+                  &lt;
+                </button>
+              }
+              {this.state.pictureIndex < this.props.cartItem.product.gallery.length -1 &&
+                <button
+                  onClick={() => this.nextPicture()}
+                >
+                  &gt;
+                </button>
+              }
+            </>
+          }
         </div>
       </div>
-      <hr className="line-break"></hr>
+        {this.props.displayLine && <hr className="line-break"></hr>}
       </>
     )
   }

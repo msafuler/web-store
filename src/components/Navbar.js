@@ -6,9 +6,6 @@ import bag from '../icons/bag.png';
 import '../styles/styles.scss';
 
 export default class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
@@ -28,6 +25,10 @@ export default class Navbar extends React.Component {
           changeCurrency={this.props.changeCurrency}
           currencies={this.props.currencies}
           currency={this.props.currency}
+          trolley={this.props.trolley}
+          products={this.props.products}
+          addToTrolley={this.props.addToTrolley}
+          removeFromTrolley={this.props.removeFromTrolley}
         />
       </div>
     )

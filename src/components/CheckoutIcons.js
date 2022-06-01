@@ -1,12 +1,8 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import CurrencyList from './CurrencyList';
-import trolley from '../icons/trolley.png';
+import Trolley from './Trolley'
 
 export default class CheckoutIcons extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
@@ -16,9 +12,16 @@ export default class CheckoutIcons extends React.Component {
           changeCurrency={this.props.changeCurrency}
           currencies={this.props.currencies}
         />
-        <Link to="/checkout">
-          <img src={trolley} alt="trolley" id='trolley' />
-        </Link>
+        <div>
+          <Trolley
+          trolley={this.props.trolley}
+          currency={this.props.currency}
+          currencies={this.props.currencies}
+          addToTrolley={this.props.addToTrolley}
+          removeFromTrolley={this.props.removeFromTrolley}
+          products={this.props.products}
+          />
+        </div>
       </div>
     )
   }

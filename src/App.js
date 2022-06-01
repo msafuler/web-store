@@ -4,6 +4,7 @@ import { Query } from '@apollo/client/react/components';
 import { Switch, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import ProductList from './components/ProductList';
+import Trolley from './components/Trolley';
 import Checkout from './components/Checkout';
 import ProductDetails from './components/ProductDetails';
 import './App.css';
@@ -125,6 +126,8 @@ class App extends React.Component {
               category={this.state.category}
               products={this.productData(data)}
               addToTrolley={this.addToTrolley}
+              removeFromTrolley={this.removeFromTrolley}
+              trolley={this.state.trolley}
             />
             <Switch>
               <Route path="/products/:id">
@@ -141,10 +144,9 @@ class App extends React.Component {
                   products={this.productData(data)}
                   currencies={data.currencies}
                   currency={this.state.currency}
-                  addToTrolley={this.addToTrolley}
                 />
               </Route>
-             <Route path="/checkout">
+              <Route path="/checkout">
                 <Checkout
                   products={this.productData(data)}
                   currencies={data.currencies}
