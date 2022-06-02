@@ -1,7 +1,3 @@
-.hidden-trolley {
-  display: none;
-}
-
 .checkout-button {
   font-size: 12px;
   box-shadow: 1px 1px 16px 1px $light-grey;
@@ -18,6 +14,7 @@
 
 .trolley-content {
   background-color: white;
+  z-index: 2;
   width: 280px;
   padding: 12px;
   font-size: 12px;
@@ -27,6 +24,10 @@
   position: absolute;
   right: 80px;
   top: 57px;
+}
+
+.hidden-trolley {
+  display: none;
 }
 
 .trolley-buttons-container {
@@ -45,12 +46,11 @@
 }
 
 .trolley-products {
-  margin-bottom: 16px;
   .checkout-product-container {
     display: grid;
     grid-template-rows: auto;
-    grid-template-columns: 160px 12px 100px;
-    gap: 4px;
+    grid-template-columns: 160px 4px 100px;
+    gap: 8px;
     justify-content: stretch;
   }
  .checkout-picture-container {
@@ -58,11 +58,11 @@
     justify-self: end;
   }
  .checkout-pic {
-    height: 150px;
-    width: 100%;
+    height: auto;
     align-items: center;
-    object-fit: scale-down;
+    object-fit: cover;
     max-height: 300px;
+    overflow: hidden;
   }
   .product-attribute-button {
     border: 1px solid $graphite;
@@ -85,11 +85,34 @@
     font-weight: lighter;
   }
   .checkout-buttons-container {
-    height: 150px;
+    padding: 4px 0 4px 0;
+  }
+  .line-break {
+    display: none;
   }
 }
 
 .total-price {
-  margin-top: 16px;
+  margin-top: 32px;
   font-weight: bold;
+}
+
+.trolley-products-container {
+  margin-top: 32px;
+}
+
+.trolley-quantity-counter {
+  font-size: 8px;
+  color: white;
+  font-weight: bolder;
+  border: 1px solid $graphite;
+  background-color: $graphite;
+  padding: 2px 6px;
+  border-radius: 50%;
+  position: absolute;
+  margin: -10px 0 0 -10px;
+}
+
+.scrollbar {
+  overflow: scroll;
 }

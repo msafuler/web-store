@@ -75,7 +75,7 @@ export default class CheckoutProduct extends React.Component {
           }
         </div>
       </div>
-        {this.props.displayLine && <hr className="line-break"></hr>}
+        <hr className="line-break"></hr>
       </>
     )
   }

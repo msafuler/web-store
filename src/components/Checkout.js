@@ -26,7 +26,6 @@ export default class Checkout extends React.Component {
                 trolley={this.props.trolley}
                 key={cartItem.attributes.toString()}
                 displayButtons={true}
-                displayLine={true}
               />
             )
           })
