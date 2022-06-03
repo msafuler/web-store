@@ -1,10 +1,9 @@
 import React from 'react';
 import { gql } from '@apollo/client';
 import { Query } from '@apollo/client/react/components';
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Navbar from './components/Navbar';
 import ProductList from './components/ProductList';
-import Trolley from './components/Trolley';
 import Checkout from './components/Checkout';
 import ProductDetails from './components/ProductDetails';
 import './App.css';
@@ -57,12 +56,18 @@ class App extends React.Component {
         name: 'all'
       },
       trolley: {},
+      overlay: false
     };
 
     this.changeCurrency = this.changeCurrency.bind(this);
     this.changeCategory = this.changeCategory.bind(this);
     this.addToTrolley = this.addToTrolley.bind(this);
     this.removeFromTrolley = this.removeFromTrolley.bind(this);
+    this.changeOverlay = this.changeOverlay.bind(this);
+  }
+
+  changeOverlay() {
+    this.setState({ overlay: !this.state.overlay });
   }
 
   changeCurrency(newCurrency) {
@@ -128,35 +133,45 @@ class App extends React.Component {
               addToTrolley={this.addToTrolley}
               removeFromTrolley={this.removeFromTrolley}
               trolley={this.state.trolley}
+              overlay={this.overlay}
+              changeOverlay={this.changeOverlay}
             />
-            <Switch>
-              <Route path="/products/:id">
-                <ProductDetails
-                  products={this.productData(data)}
-                  addToTrolley={this.addToTrolley}
-                  currencies={data.currencies}
-                  currency={this.state.currency}
+            <div id="overlay" className={this.state.overlay ? "visible" : ""}></div>
+            <div className="body-content">
+              <Switch>
+                <Route
+                  exact
+                path="/"
+                  render={() => <Redirect to="/products" />}
                 />
-              </Route>
-              <Route path="/products">
-                <ProductList
-                  category={this.state.category}
-                  products={this.productData(data)}
-                  currencies={data.currencies}
-                  currency={this.state.currency}
-                />
-              </Route>
-              <Route path="/checkout">
-                <Checkout
-                  products={this.productData(data)}
-                  currencies={data.currencies}
-                  currency={this.state.currency}
-                  addToTrolley={this.addToTrolley}
-                  removeFromTrolley={this.removeFromTrolley}
-                  trolley={this.state.trolley}
-                />
-              </Route>
-            </Switch>
+                <Route path="/products/:id">
+                  <ProductDetails
+                    products={this.productData(data)}
+                    addToTrolley={this.addToTrolley}
+                    currencies={data.currencies}
+                    currency={this.state.currency}
+                  />
+                </Route>
+                <Route path="/products">
+                  <ProductList
+                    category={this.state.category}
+                    products={this.productData(data)}
+                    currencies={data.currencies}
+                    currency={this.state.currency}
+                  />
+                </Route>
+                <Route path="/checkout">
+                  <Checkout
+                    products={this.productData(data)}
+                    currencies={data.currencies}
+                    currency={this.state.currency}
+                    addToTrolley={this.addToTrolley}
+                    removeFromTrolley={this.removeFromTrolley}
+                    trolley={this.state.trolley}
+                  />
+                </Route>
+              </Switch>
+            </div>
           </div>)
         }}
       </Query>

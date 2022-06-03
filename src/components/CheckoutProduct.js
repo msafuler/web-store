@@ -24,57 +24,60 @@ export default class CheckoutProduct extends React.Component {
 
     return (
       <>
-      <div className="checkout-product-container">
-        <div className="checkout-product">
-          <h3>
-            {this.props.cartItem.product.brand}
-          </h3>
-          <h2>
-            {this.props.cartItem.product.name}
-          </h2>
-            <span className="product-attribute-price">
-              {this.props.currency.symbol} {price.amount}
-            </span>
-          {this.props.cartItem.product.attributes.map((attribute, attributeIndex) => {
-            return (
-              <AttributeDetails
-                attribute={attribute}
-                key={attribute.name}
-                attributeIndex={attributeIndex}
-                selectedAttributeItem={this.props.cartItem.attributes[attributeIndex]}
-                changeSelectedAttributeItem={() => {}}
-              />
-            )
-          }
-          )}
-        </div>
-        <div className="checkout-buttons-container">
-            <button onClick={() => this.props.addToTrolley(this.props.cartItem.product, this.props.cartItem.attributes)}>+</button>
-          {this.props.cartItem.quantity}
-            <button onClick={() => this.props.removeFromTrolley(this.props.cartItem.product, this.props.cartItem.attributes)}>-</button>
-        </div>
-        <div className="checkout-picture-container">
-          <img src={this.props.cartItem.product.gallery[this.state.pictureIndex]} alt="checkout-pic" className="checkout-pic" />
-          {this.props.displayButtons &&
-            <>
-              {this.state.pictureIndex > 0 &&
-                <button
-                  onClick={() => this.previousPicture()}
-                >
-                  &lt;
-                </button>
+        <div className="checkout-product-container">
+          <div className="checkout-product">
+            <h3>
+              {this.props.cartItem.product.brand}
+            </h3>
+            <h2>
+              {this.props.cartItem.product.name}
+            </h2>
+              <span className="product-attribute-price">
+                {this.props.currency.symbol} {price.amount}
+              </span>
+            {this.props.cartItem.product.attributes.map((attribute, attributeIndex) => {
+              return (
+                <AttributeDetails
+                  attribute={attribute}
+                  key={attribute.name}
+                  attributeIndex={attributeIndex}
+                  selectedAttributeItem={this.props.cartItem.attributes[attributeIndex]}
+                  changeSelectedAttributeItem={() => {}}
+                />
+              )
+            }
+            )}
+          </div>
+          <div className="checkout-buttons-container">
+              <button onClick={() => this.props.addToTrolley(this.props.cartItem.product, this.props.cartItem.attributes)}>+</button>
+            {this.props.cartItem.quantity}
+              <button onClick={() => this.props.removeFromTrolley(this.props.cartItem.product, this.props.cartItem.attributes)}>-</button>
+          </div>
+          <div className="checkout-picture-container">
+            <img src={this.props.cartItem.product.gallery[this.state.pictureIndex]} alt="checkout-pic" className="checkout-pic" />
+            <div className="checkout-pic-switch">
+              {this.props.displayButtons &&
+                <>
+                  <button
+                    className="pic-switch-button"
+                  style={{ visibility: this.state.pictureIndex === 0 ? 'hidden' : 'visible'}}
+                    onClick={() => this.previousPicture()}
+                  >
+                    &lt;
+                  </button>
+                  {this.state.pictureIndex < this.props.cartItem.product.gallery.length -1 &&
+                    <button
+                      className="pic-switch-button"
+                      onClick={() => this.nextPicture()}
+                    >
+                      &gt;
+                    </button>
+                  }
+                </>
               }
-              {this.state.pictureIndex < this.props.cartItem.product.gallery.length -1 &&
-                <button
-                  onClick={() => this.nextPicture()}
-                >
-                  &gt;
-                </button>
-              }
-            </>
-          }
+            </div>
+          </div>
         </div>
-      </div>
         <hr className="line-break"></hr>
       </>
     )

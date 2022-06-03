@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import greentrolley from '../icons/green-trolley.png';
 
 export default class Product extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
   render() {
     return (
       <Link to={`/products/${this.props.id}`}>
@@ -16,7 +14,7 @@ export default class Product extends React.Component {
           </div>
           <img src={greentrolley} alt="green-trolley" className='green-trolley' />
           <div className='product-info'>
-            <span className="product-name">{this.props.name}</span>
+            <span className="product-name">{this.props.brand} {this.props.name}</span>
             <span className="product-price">{this.props.price.amount} {this.props.currency.symbol}</span>
           </div>
         </div>

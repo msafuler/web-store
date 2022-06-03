@@ -1,7 +1,13 @@
 .navbar-container {
   display: flex;
   justify-content: space-between;
-  margin: 0 24px 0 24px;
+  padding: 24px 56px 0 56px;
+  position: fixed;
+  margin: 0 24px;
+  top: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 5;
 }
 
 .navbar-categories {
@@ -20,6 +26,7 @@
   display: flex;
   flex: 1;
   justify-content: flex-end;
+  margin-right: 164px;
   font-size: 16pt;
   gap: 16px;
 }

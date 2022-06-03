@@ -1,10 +1,8 @@
 import React from 'react';
 import Product from './Product';
+import { findPrice } from '../utilities/utility'
 
 export default class ProductList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
@@ -17,9 +15,10 @@ export default class ProductList extends React.Component {
               id={product.id}
               gallery={product.gallery[0]}
               name={product.name}
+              brand={product.brand}
               inStock={product.inStock}
               currency={this.props.currency}
-              price={product.prices.filter(price => price.currency.label === this.props.currency.label)[0]}
+              price={findPrice(product.prices, this.props.currency)}
             />
           ))}
         </div>

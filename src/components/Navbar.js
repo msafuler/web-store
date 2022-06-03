@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import CategoryList from './CategoryList';
 import CheckoutIcons from './CheckoutIcons';
 import bag from '../icons/bag.png';
@@ -17,9 +16,7 @@ export default class Navbar extends React.Component {
           changeCategory={this.props.changeCategory}
         />
         <div className='bag-container'>
-          <Link to="/products">
-            <img src={bag} alt="green-bag" id='green-bag' />
-          </Link>
+          <img src={bag} alt="green-bag" id='green-bag' />
         </div>
         <CheckoutIcons
           changeCurrency={this.props.changeCurrency}
@@ -29,6 +26,8 @@ export default class Navbar extends React.Component {
           products={this.props.products}
           addToTrolley={this.props.addToTrolley}
           removeFromTrolley={this.props.removeFromTrolley}
+          overlay={this.props.overlay}
+          changeOverlay={this.props.changeOverlay}
         />
       </div>
     )

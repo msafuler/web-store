@@ -7,12 +7,32 @@
 @import 'fonts';
 
 body {
-  margin: 24px 56px;
   color: $graphite;
   font-family: Poppins;
+
+  #overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 59px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    cursor: pointer;
+    &.visible {
+      display: block;
+    }
+  }
 }
 
 a {
   color: $graphite;
   text-decoration: none;
+}
+
+.body-content {
+  margin: 112px 56px 24px 56px;
 }

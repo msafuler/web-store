@@ -14,6 +14,7 @@
   margin-top: 64px;
   display: flex;
   flex-direction: column;
+  padding-left: 24px;
 }
 
 .checkout-product-container {
@@ -79,6 +80,21 @@
 
 .cart-div {
   margin-bottom: 56px;
+}
+
+.checkout-pic-switch {
+  position: absolute;
+  left: 89%;
+  margin-top: 22vw;
+}
+
+.pic-switch-button {
+  height: 24px;
+  width: 24px;
+  background-color: $graphite;
+  color: white;
+  font-weight: bolder;
+  margin: 0 4px;
 }
 
 @media only screen and (max-width: 1400px) {

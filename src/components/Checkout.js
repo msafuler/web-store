@@ -12,23 +12,28 @@ export default class Checkout extends React.Component {
       <div className="cart-container">
         <h1 className="cart-div">CART</h1>
         {Object.keys(this.props.trolley).map((id) => {
-          return this.props.trolley[id].map((cartItem) => {
-            priceSum += findPrice(cartItem.product.prices, this.props.currency).amount * cartItem.quantity
-            quantity += cartItem.quantity;
+          return (
+            <div
+            key={id}>
+              {this.props.trolley[id].map((cartItem) => {
+                priceSum += findPrice(cartItem.product.prices, this.props.currency).amount * cartItem.quantity
+                quantity += cartItem.quantity;
 
-            return (
-              <CheckoutProduct
-                cartItem={cartItem}
-                currencies={this.props.currencies}
-                currency={this.props.currency}
-                addToTrolley={this.props.addToTrolley}
-                removeFromTrolley={this.props.removeFromTrolley}
-                trolley={this.props.trolley}
-                key={cartItem.attributes.toString()}
-                displayButtons={true}
-              />
-            )
-          })
+                return (
+                  <CheckoutProduct
+                    cartItem={cartItem}
+                    currencies={this.props.currencies}
+                    currency={this.props.currency}
+                    addToTrolley={this.props.addToTrolley}
+                    removeFromTrolley={this.props.removeFromTrolley}
+                    trolley={this.props.trolley}
+                    key={cartItem.attributes.toString()}
+                    displayButtons={true}
+                  />
+                )
+              })}
+            </div>
+          )
         })}
         <span>Tax 21%: {this.props.currency.symbol} { (.21 * priceSum).toFixed(2) }</span>
         <span>Quantity: { quantity}</span>

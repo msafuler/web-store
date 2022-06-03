@@ -4,13 +4,42 @@ import Trolley from './Trolley';
 import { findPrice } from '../utilities/utility';
 
 export default class CheckoutIcons extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isListOpen: false
+    };
+
+    this.box = React.createRef();
+    this.toggleList = this.toggleList.bind(this);
+  }
+
+  toggleList() {
+    this.setState(prevState => ({
+      isListOpen: !prevState.isListOpen
+    }));
+  };
+
+  componentDidMount() {
+    document.addEventListener('click', this.handleOutsideClick);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleOutsideClick);
+  }
+
+  handleOutsideClick = (event) => {
+    if (this.box.current && !this.box.current.contains(event.target)) {
+      this.setState({ isListOpen: false });
+    }
+  }
 
   render() {
     let quantity = 0;
     let priceSum = 0;
 
-    Object.keys(this.props.trolley).map((id) => {
-      return this.props.trolley[id].map((cartItem) => {
+    Object.keys(this.props.trolley).forEach((id) => {
+      this.props.trolley[id].forEach((cartItem) => {
         priceSum += findPrice(cartItem.product.prices, this.props.currency).amount * cartItem.quantity
         quantity += cartItem.quantity;
       })
@@ -22,6 +51,9 @@ export default class CheckoutIcons extends React.Component {
           currency={this.props.currency}
           changeCurrency={this.props.changeCurrency}
           currencies={this.props.currencies}
+          innerRef={this.box}
+          toggleList={this.toggleList}
+          isListOpen={this.state.isListOpen}
         />
         <div>
           <Trolley
@@ -33,6 +65,8 @@ export default class CheckoutIcons extends React.Component {
           products={this.props.products}
           quantity={quantity}
           priceSum ={priceSum}
+          overlay={this.props.overlay}
+          changeOverlay={this.props.changeOverlay}
           />
         </div>
       </div>
