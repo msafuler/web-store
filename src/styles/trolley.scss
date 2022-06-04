@@ -59,6 +59,10 @@
   border: 1px solid $graphite;
 }
 
+.view-bag-button:active {
+  background-color: $light-grey;
+}
+
 .trolley-products {
   .checkout-product-container {
     display: grid;

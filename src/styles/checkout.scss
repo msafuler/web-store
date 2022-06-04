@@ -14,7 +14,6 @@
   margin-top: 64px;
   display: flex;
   flex-direction: column;
-  padding-left: 24px;
 }
 
 .checkout-product-container {
@@ -26,7 +25,7 @@
 }
 
 .checkout-picture-container {
-  display: flex;
+
   justify-self: end;
 }
 
@@ -83,9 +82,8 @@
 }
 
 .checkout-pic-switch {
-  position: absolute;
-  left: 89%;
-  margin-top: 22vw;
+
+
 }
 
 .pic-switch-button {

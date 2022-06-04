@@ -2,14 +2,12 @@
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: 1fr 1fr 1fr;
-  margin: 0 auto;
   gap: 24px;
-  justify-content: center;
 }
 
 .capitalize {
   text-transform: capitalize;
-  margin: 56px 0 54px 24px;
+  margin: 56px 0;
 }
 
 .product {
