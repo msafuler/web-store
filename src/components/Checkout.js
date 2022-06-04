@@ -38,7 +38,12 @@ export default class Checkout extends React.Component {
         <span>Tax 21%: {this.props.currency.symbol} { (.21 * priceSum).toFixed(2) }</span>
         <span>Quantity: { quantity}</span>
         <span>Total: { this.props.currency.symbol } { priceSum.toFixed(2) }</span>
-        <button className="order-btn">ORDER</button>
+        <button
+          className="order-btn"
+          onClick={() => this.props.emptyTrolley()}
+        >
+          ORDER
+        </button>
       </div>
     )
   }

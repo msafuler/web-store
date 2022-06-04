@@ -33,6 +33,7 @@
   object-fit: cover;
   overflow: hidden;
   padding: 16px;
+  cursor: pointer;
 }
 
 .product-details-info-container {
@@ -73,6 +74,7 @@
   list-style-type: none;
   width: 24px;
   height: 24px;
+  cursor: pointer;
 }
 
 .product-color-button:hover {
@@ -111,6 +113,7 @@
   background-color: $graphite;
   color: white;
   font-weight: bolder;
+  cursor: pointer;
 }
 
 .btn-clicked:active {

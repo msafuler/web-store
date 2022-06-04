@@ -55,11 +55,11 @@ export default class CheckoutProduct extends React.Component {
           </div>
           <div className="checkout-picture-container">
             <img src={this.props.cartItem.product.gallery[this.state.pictureIndex]} alt="checkout-pic" className="checkout-pic" />
-            <div className="checkout-pic-switch">
+
               {this.props.displayButtons &&
                 <>
                   <button
-                    className="pic-switch-button"
+                    className="pic-switch-button-left"
                   style={{ visibility: this.state.pictureIndex === 0 ? 'hidden' : 'visible'}}
                     onClick={() => this.previousPicture()}
                   >
@@ -67,7 +67,7 @@ export default class CheckoutProduct extends React.Component {
                   </button>
                   {this.state.pictureIndex < this.props.cartItem.product.gallery.length -1 &&
                     <button
-                      className="pic-switch-button"
+                      className="pic-switch-button-right"
                       onClick={() => this.nextPicture()}
                     >
                       &gt;
@@ -75,7 +75,6 @@ export default class CheckoutProduct extends React.Component {
                   }
                 </>
               }
-            </div>
           </div>
         </div>
         <hr className="line-break"></hr>

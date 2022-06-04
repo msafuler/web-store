@@ -10,6 +10,9 @@
   border-radius: 4px;
   cursor: pointer;
   width: 120px;
+  &:active {
+    background-color: $middle-green;
+  }
 }
 
 .trolley-content {
@@ -23,7 +26,7 @@
   position: absolute;
   right: 200px;
   top: 59px;
-  max-height: 400px;
+  max-height: 380px;
   overflow-y: scroll;
   overflow-x: hidden;
 
@@ -44,9 +47,24 @@
   display: none;
 }
 
+.trolley-product-info {
+  max-height: 360px;;
+  padding-bottom: 24px;
+}
+
+.trolley-container {
+  position: relative;
+}
+
 .trolley-buttons-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  background-color: white;
+  position: fixed;
+  width: 280px;
+  margin-top: -7px;
+  margin-left: -12px;
+  width: 304px;
 }
 
 .view-bag-button {
@@ -80,6 +98,7 @@
     align-items: center;
     object-fit: cover;
     max-height: 300px;
+    max-width: 92px;
     overflow: hidden;
   }
   .product-attribute-button {

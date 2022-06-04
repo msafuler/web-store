@@ -67,6 +67,7 @@ export default class CheckoutIcons extends React.Component {
           priceSum ={priceSum}
           overlay={this.props.overlay}
           changeOverlay={this.props.changeOverlay}
+          emptyTrolley={this.props.emptyTrolley}
           />
         </div>
       </div>

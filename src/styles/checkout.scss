@@ -8,33 +8,46 @@
   width: 80%;
   border-radius: 4px;
   width: fit-content;
+  cursor: pointer;
+  &:active {
+    background-color: $middle-green;
+  }
 }
 
 .cart-container {
   margin-top: 64px;
   display: flex;
   flex-direction: column;
+
+  .checkout-product-container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: auto 5vw 20vw;
+    gap: 8px;
+    justify-content: stretch;
+  }
+
+  .checkout-picture-container {
+    position: relative;
+    justify-self: end;
+    width: 20vw;
+    min-height: 210px;
+  }
+
+  .checkout-pic {
+    height: auto;
+    width: 100%;
+    align-items: center;
+    object-fit: scale-down;
+    max-height: 300px;
+    display: block;
+  }
 }
 
-.checkout-product-container {
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: auto 5vw 20vw;
-  gap: 8px;
-  justify-content: stretch;
-}
-
-.checkout-picture-container {
-
-  justify-self: end;
-}
-
-.checkout-pic {
-  height: auto;
-  width: 100%;
-  align-items: center;
-  object-fit: scale-down;
-  max-height: 300px;
+.cart-container .checkout-pic {
+  width: 20vw;
+  min-height: 210px;
+  object-fit: cover;
 }
 
 .checkout-buttons-container {
@@ -81,58 +94,59 @@
   margin-bottom: 56px;
 }
 
-.checkout-pic-switch {
-
-
-}
-
-.pic-switch-button {
+.pic-switch-button-left, .pic-switch-button-right {
   height: 24px;
   width: 24px;
+  position: absolute;
+  bottom:33px;
   background-color: $graphite;
   color: white;
   font-weight: bolder;
-  margin: 0 4px;
+  right: 20px;
+}
+
+.pic-switch-button-left {
+  right: 45px;
 }
 
 @media only screen and (max-width: 1400px) {
-  .checkout-product-container {
+  .cart-container .checkout-product-container {
     grid-template-columns: auto 5vw 24vw;
   }
 }
 
 @media only screen and (max-width: 1180px) {
-  .checkout-product-container {
+  .cart-container .checkout-product-container {
     grid-template-columns: auto 5vw 26vw;
   }
 }
 
 @media only screen and (max-width: 1090px) {
-  .checkout-product-container {
+  .cart-container .checkout-product-container {
     grid-template-columns: auto 5vw 30vw;
   }
 }
 
 @media only screen and (max-width: 940px) {
-  .checkout-product-container {
+  .cart-container .checkout-product-container {
     grid-template-columns: auto 5vw 34vw;
   }
 }
 
 @media only screen and (max-width: 830px) {
-  .checkout-product-container {
+  .cart-container .checkout-product-container {
     grid-template-columns: auto 5vw 38vw;
   }
 }
 
 @media only screen and (max-width: 740px) {
-  .checkout-product-container {
+  .cart-container .checkout-product-container {
     grid-template-columns: auto 5vw 44vw;
   }
 }
 
 @media only screen and (max-width: 715px) {
-  .checkout-product-container {
+  .cart-container .checkout-product-container {
     grid-template-columns: 49vw auto 30vw;
 
   }

@@ -47,6 +47,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    let trolley;
+    if (!localStorage.getItem('trolley')) {
+      localStorage.setItem('trolley', '{}');
+    }
+    trolley = JSON.parse(localStorage.getItem('trolley'));
+
     this.state = {
       currency: {
         label: 'USD',
@@ -55,7 +61,7 @@ class App extends React.Component {
       category: {
         name: 'all'
       },
-      trolley: {},
+      trolley: trolley,
       overlay: false
     };
 
@@ -64,6 +70,7 @@ class App extends React.Component {
     this.addToTrolley = this.addToTrolley.bind(this);
     this.removeFromTrolley = this.removeFromTrolley.bind(this);
     this.changeOverlay = this.changeOverlay.bind(this);
+    this.emptyTrolley = this.emptyTrolley.bind(this);
   }
 
   changeOverlay() {
@@ -79,26 +86,31 @@ class App extends React.Component {
   }
 
   addToTrolley(product, attributes) {
+    let newTrolley;
     if (!(product.id in this.state.trolley)) {
-      this.setState({ trolley: {...this.state.trolley, [product.id]: [{product: product, quantity: 1, attributes: attributes}]} })
+      newTrolley = { ...this.state.trolley, [product.id]: [{ product: product, quantity: 1, attributes: attributes }]};
+      this.setState({ trolley: newTrolley });
     } else {
-
       const commonProducts = this.state.trolley[product.id].filter(p => {
-        return p.attributes.join("") === attributes.join("")
+        return p.attributes.join("") === attributes.join("");
       })
       if (commonProducts.length) {
-        const newProducts = [...this.state.trolley[product.id]]
-        const commonIndex = newProducts.indexOf(commonProducts[0])
-        newProducts[commonIndex].quantity++
-        this.setState({ trolley: { ...this.state.trolley, [product.id]: newProducts }})
+        const newProducts = [...this.state.trolley[product.id]];
+        const commonIndex = newProducts.indexOf(commonProducts[0]);
+        newProducts[commonIndex].quantity++;
+        newTrolley = { ...this.state.trolley, [product.id]: newProducts };
+        this.setState({ trolley: newTrolley });
       } else {
-        const newProducts = [...this.state.trolley[product.id], { product: product, quantity: 1, attributes: attributes }]
-        this.setState({ trolley: { ...this.state.trolley, [product.id]: newProducts }})
+        const newProducts = [...this.state.trolley[product.id], { product: product, quantity: 1, attributes: attributes }];
+        newTrolley = { ...this.state.trolley, [product.id]: newProducts };
+        this.setState({ trolley: newTrolley });
       }
     }
+    localStorage.setItem('trolley', JSON.stringify(newTrolley));
   }
 
   removeFromTrolley(product, attributes) {
+    let newTrolley;
     const commonProducts = this.state.trolley[product.id].filter(p => p.attributes.join("") === attributes.join(""))
     if (commonProducts.length) {
       const newProducts = [...this.state.trolley[product.id]]
@@ -107,8 +119,15 @@ class App extends React.Component {
       if (newProducts[commonIndex].quantity === 0) {
         newProducts.splice(commonIndex, 1)
       }
-      this.setState({ trolley: { ...this.state.trolley, [product.id]: newProducts } })
+      newTrolley = { ...this.state.trolley, [product.id]: newProducts };
+      this.setState({ trolley: newTrolley })
     }
+    localStorage.setItem('trolley', JSON.stringify(newTrolley));
+  }
+
+  emptyTrolley() {
+    this.setState({ trolley: {}});
+    localStorage.setItem('trolley', '{}');
   }
 
   productData(data) {
@@ -135,6 +154,7 @@ class App extends React.Component {
               trolley={this.state.trolley}
               overlay={this.overlay}
               changeOverlay={this.changeOverlay}
+              emptyTrolley={this.emptyTrolley}
             />
             <div id="overlay" className={this.state.overlay ? "visible" : ""}></div>
             <div className="body-content">
@@ -168,6 +188,7 @@ class App extends React.Component {
                     addToTrolley={this.addToTrolley}
                     removeFromTrolley={this.removeFromTrolley}
                     trolley={this.state.trolley}
+                    emptyTrolley={this.emptyTrolley}
                   />
                 </Route>
               </Switch>

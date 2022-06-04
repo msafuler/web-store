@@ -31,34 +31,37 @@ export default class Trolley extends React.Component {
         <div
           className={`trolley-content ${this.state.isTrolleyOpen ? '' : 'hidden-trolley'}`}
         >
-            <h2>My bag: {this.props.quantity}</h2>
-            {Object.keys(this.props.trolley).map((id) => {
-              return (
-                <div key={id}>
-                  {this.props.trolley[id].map((cartItem) => {
-                    return (
-                      <div
-                        className="trolley-products-container"
-                        key={cartItem.attributes.toString()}
-                        >
-                        <div className='trolley-products'>
-                          <CheckoutProduct
-                            cartItem={cartItem}
-                            currencies={this.props.currencies}
-                            currency={this.props.currency}
-                            addToTrolley={this.props.addToTrolley}
-                            removeFromTrolley={this.props.removeFromTrolley}
-                            trolley={this.props.trolley}
-                            displayButtons={false}
-                          />
+          <div className="trolley-container">
+            <div className="trolley-product-info">
+              <h2>My bag: {this.props.quantity}</h2>
+              {Object.keys(this.props.trolley).map((id) => {
+                return (
+                  <div key={id}>
+                    {this.props.trolley[id].map((cartItem) => {
+                      return (
+                        <div
+                          className="trolley-products-container"
+                          key={cartItem.attributes.toString()}
+                          >
+                          <div className='trolley-products'>
+                            <CheckoutProduct
+                              cartItem={cartItem}
+                              currencies={this.props.currencies}
+                              currency={this.props.currency}
+                              addToTrolley={this.props.addToTrolley}
+                              removeFromTrolley={this.props.removeFromTrolley}
+                              trolley={this.props.trolley}
+                              displayButtons={false}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              )
-            })}
-            <span className="total-price">Total: {this.props.currency.symbol} {this.props.priceSum.toFixed(2)}</span>
+                      )
+                    })}
+                  </div>
+                )
+              })}
+              <span className="total-price">Total: {this.props.currency.symbol} {this.props.priceSum.toFixed(2)}</span>
+            </div>
             <div className="trolley-buttons-container">
               <Link to="/checkout">
                 <button
@@ -68,13 +71,14 @@ export default class Trolley extends React.Component {
                   VIEW BAG
                 </button>
               </Link>
-                <button
-                  className="checkout-button"
-                >
-                  CHECKOUT
-                </button>
+              <button
+                className="checkout-button"
+                onClick={() => this.props.emptyTrolley()}
+              >
+                CHECKOUT
+              </button>
             </div>
-
+          </div>
         </div>
       </div>
     )

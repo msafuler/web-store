@@ -28,6 +28,7 @@ export default class Navbar extends React.Component {
           removeFromTrolley={this.props.removeFromTrolley}
           overlay={this.props.overlay}
           changeOverlay={this.props.changeOverlay}
+          emptyTrolley={this.props.emptyTrolley}
         />
       </div>
     )

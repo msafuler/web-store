@@ -4,9 +4,7 @@ import { HashRouter as Router } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql
+  ApolloProvider
 } from "@apollo/client";
 import './index.css';
 import App from './App';
